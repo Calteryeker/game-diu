@@ -27,6 +27,7 @@ public class LevelManager : MonoBehaviour
 
     private void Awake(){
         instance = this;
+        pontuacao = 0;
     }
 
     // Update is called once per frame
@@ -47,9 +48,10 @@ public class LevelManager : MonoBehaviour
     void RespawnPlayer(){
         player.GetComponent<RespawnPlayer>().iniciar = true;
         
-        enemy.GetComponent<RespawnEnemy>().initialLife = 0;
+        enemy.GetComponent<RespawnEnemy>().initialLife = 1;
         RespawnEnemy();
         enemy.GetComponent<RespawnEnemy>().enemy.GetComponent<Inimigo>().GetComponent<Target>().life = 1;
+        enemy.GetComponent<RespawnEnemy>().enemy.GetComponent<Inimigo>().limiar = 500;
 
         if(numCaixas == 1){
             caixa1.GetComponent<RespawnCaixa>().iniciar = true;

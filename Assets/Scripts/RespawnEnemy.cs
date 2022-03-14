@@ -6,6 +6,7 @@ public class RespawnEnemy : MonoBehaviour
 {
     public bool iniciar;
     public int initialLife;
+    public int novoLimiar;
     private int frameCount;
     public GameObject enemy;
     // Start is called before the first frame update
@@ -30,7 +31,12 @@ public class RespawnEnemy : MonoBehaviour
     }
 
     void Respawn(){
-        Instantiate(enemy, this.gameObject.transform.position, Quaternion.identity);
         enemy.GetComponent<Target>().life = initialLife;
+
+        if(enemy.GetComponent<Inimigo>().limiar > 200)
+            enemy.GetComponent<Inimigo>().limiar -= 25;
+        
+        Instantiate(enemy, this.gameObject.transform.position, Quaternion.identity);
+        
     }
 }

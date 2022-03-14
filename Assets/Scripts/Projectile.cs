@@ -5,10 +5,10 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float Speed = 2;
+    public float Speed = 3;
     void Start()
     {
-        
+        Speed = 3;
     }
 
     // Update is called once per frame
@@ -26,8 +26,9 @@ public class Projectile : MonoBehaviour
         if(collision.gameObject.tag == "Player"){
             collision.gameObject.GetComponent<Target>().GotHited();  
         }
-
-        Destroy(this.gameObject);
+        
+        if(collision.gameObject.tag != "Enemy")
+            Destroy(this.gameObject);
         
     }
 

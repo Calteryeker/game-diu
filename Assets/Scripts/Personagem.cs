@@ -101,7 +101,8 @@ public class Personagem : MonoBehaviour
     }
 
     void OnDestroy(){
-        LevelManager.instance.respawnPlayer = true;
         Destroy(GameObject.FindWithTag("Enemy"));
+        LevelManager.instance.respawnPlayer = true;
+        
     }
 }

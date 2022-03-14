@@ -8,10 +8,10 @@ public class Inimigo : MonoBehaviour
     public GameObject respawn;
     public GameObject shootProjectile;
     private int frameCount;
-    private int limiar;
+    public int limiar;
     void Start()
     {
-        limiar = 1000;
+
         anim = GetComponent<Animator>();
         respawn = GameObject.FindGameObjectWithTag("RespawnPointEnemy");
         shootProjectile = GameObject.FindGameObjectWithTag("ShootPoint");
@@ -32,13 +32,10 @@ public class Inimigo : MonoBehaviour
 
     public void Shoot(){
         shootProjectile.GetComponent<ShootProjectile>().Spawn();
-
-        if(limiar > 300)
-            limiar -= 50;
     }
 
     void OnDestroy(){
-        GameObject.FindGameObjectWithTag("RespawnPointEnemy").GetComponent<RespawnEnemy>().initialLife += 3;
+        GameObject.FindGameObjectWithTag("RespawnPointEnemy").GetComponent<RespawnEnemy>().initialLife += 2;
         LevelManager.instance.respawnEnemy = true;
         LevelManager.instance.OpenDoor();
     }

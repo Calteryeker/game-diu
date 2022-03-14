@@ -107,7 +107,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!61 &6716363909766227384
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -180,3 +180,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   respawn: {fileID: 0}
   shootProjectile: {fileID: 0}
+  limiar: 450
