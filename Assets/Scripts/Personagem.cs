@@ -113,7 +113,7 @@ public class Personagem : MonoBehaviour
     }
 
     void OnDestroy(){
-        if(GetComponent<Target>().life == 0){
+        if(GetComponent<Target>().life <= 0){
             LevelManager.instance.GameOver();
         }
         
