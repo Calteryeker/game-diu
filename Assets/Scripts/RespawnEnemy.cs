@@ -33,7 +33,7 @@ public class RespawnEnemy : MonoBehaviour
     void Respawn(){
         enemy.GetComponent<Target>().life = initialLife;
 
-        if(enemy.GetComponent<Inimigo>().limiar > 200)
+        if(enemy.GetComponent<Inimigo>().limiar > 300)
             enemy.GetComponent<Inimigo>().limiar -= 25;
         
         Instantiate(enemy, this.gameObject.transform.position, Quaternion.identity);

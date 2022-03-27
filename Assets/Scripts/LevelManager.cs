@@ -11,6 +11,8 @@ public class LevelManager : MonoBehaviour
     public GameObject door;
     public GameObject caixa1;
     public GameObject caixa2;
+    public GameObject caixa3;
+    public GameObject caixa4;
     public int numCaixas;
     public GameObject player;
     public bool respawnPlayer;
@@ -24,7 +26,7 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        numCaixas = 2;
+        numCaixas = 4;
         respawnEnemy = false;
         respawnPlayer = false;
         pause = false;
@@ -51,7 +53,9 @@ public class LevelManager : MonoBehaviour
     void RespawnCaixas(){
         caixa1.GetComponent<RespawnCaixa>().iniciar = true;
         caixa2.GetComponent<RespawnCaixa>().iniciar = true;
-        numCaixas = 2;
+        caixa3.GetComponent<RespawnCaixa>().iniciar = true;
+        caixa4.GetComponent<RespawnCaixa>().iniciar = true;
+        numCaixas = 4;
     }
     void RespawnPlayer(){
         player.GetComponent<RespawnPlayer>().iniciar = true;

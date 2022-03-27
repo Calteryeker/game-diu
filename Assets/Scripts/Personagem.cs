@@ -27,10 +27,13 @@ public class Personagem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        Move();
-        Jump();
-        Hit();
-        PowerUp();
+        if(Time.timeScale != 0){
+            Move();
+            Jump();
+            Hit();
+            PowerUp();
+        }
+
     }
 
     void Move(){
