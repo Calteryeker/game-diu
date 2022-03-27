@@ -19,14 +19,17 @@ public class Inimigo : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if(frameCount == limiar){
-            Shoot();
-            frameCount = 0;
+    {   
+        if(Time.timeScale != 0){
+            if(frameCount == limiar){
+                Shoot();
+                frameCount = 0;
+            }
+            else{
+                frameCount++;
+            }
         }
-        else{
-            frameCount++;
-        }
+        
     
     }
 
@@ -35,8 +38,10 @@ public class Inimigo : MonoBehaviour
     }
 
     void OnDestroy(){
-        GameObject.FindGameObjectWithTag("RespawnPointEnemy").GetComponent<RespawnEnemy>().initialLife += 2;
-        LevelManager.instance.respawnEnemy = true;
-        LevelManager.instance.OpenDoor();
+        if(GetComponent<Target>().life <= 0){
+            GameObject.FindGameObjectWithTag("RespawnPointEnemy").GetComponent<RespawnEnemy>().initialLife += 1;
+            LevelManager.instance.respawnEnemy = true;
+            LevelManager.instance.OpenDoor();
+        }
     }
 }

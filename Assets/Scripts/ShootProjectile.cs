@@ -19,5 +19,7 @@ public class ShootProjectile : MonoBehaviour
 
     public void Spawn(){
         Instantiate(projectile, this.gameObject.transform.position, Quaternion.identity);
+
+
     }
 }

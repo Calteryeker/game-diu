@@ -5,26 +5,31 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float Speed = 3;
+    public float Speed;
+    public Vector3 targetPosition;
     void Start()
     {
-        Speed = 3;
+        targetPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+        Speed = 3f;
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {   
         Move();
+
     }
 
     void Move(){
-        Vector3 movement = new Vector3(-1f, 0f, 0f);
-        transform.position += movement * Time.deltaTime * Speed;
+        Vector3 direction = targetPosition - this.transform.position;
+        direction.Normalize();
+        targetPosition += direction;
+        transform.position += direction * Speed * Time.deltaTime;
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
         if(collision.gameObject.tag == "Player"){
-            collision.gameObject.GetComponent<Target>().GotHited();  
+            collision.gameObject.GetComponent<Target>().GotHited(1);  
         }
         
         if(collision.gameObject.tag != "Enemy")

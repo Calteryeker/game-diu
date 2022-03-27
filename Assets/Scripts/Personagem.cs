@@ -13,10 +13,12 @@ public class Personagem : MonoBehaviour
     private Rigidbody2D rig;
     private Animator anim;
     private GameObject target;
+    private int power;
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        power = 1;
         rig = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
  
@@ -28,6 +30,7 @@ public class Personagem : MonoBehaviour
         Move();
         Jump();
         Hit();
+        PowerUp();
     }
 
     void Move(){
@@ -67,8 +70,17 @@ public class Personagem : MonoBehaviour
     void Hit(){
         if(canHit){
             if(Input.GetButtonDown("Fire1")){
-               target.GetComponent<Target>().GotHited();
+               target.GetComponent<Target>().GotHited(power);
                 
+            }
+        }
+    }
+
+    void PowerUp(){
+        if(Input.GetKeyDown(KeyCode.E)){
+            if(this.GetComponent<Target>().life >= 3){
+                power += 2;
+                this.GetComponent<Target>().life -= 2;
             }
         }
     }
@@ -101,8 +113,9 @@ public class Personagem : MonoBehaviour
     }
 
     void OnDestroy(){
-        Destroy(GameObject.FindWithTag("Enemy"));
-        LevelManager.instance.respawnPlayer = true;
+        if(GetComponent<Target>().life == 0){
+            LevelManager.instance.GameOver();
+        }
         
     }
 }

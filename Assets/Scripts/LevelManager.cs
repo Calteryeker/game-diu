@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {   
     public static LevelManager instance;
     public Text textPontuacao;
+    public Text textLife;
     public int pontuacao;
     public GameObject door;
     public GameObject caixa1;
@@ -17,12 +19,15 @@ public class LevelManager : MonoBehaviour
     public bool respawnEnemy;
     private int enemyLife;
     private float projectileSpeed;
+    private bool pause;
+    public GameObject pauseMenu;
 
     void Start()
     {
         numCaixas = 2;
         respawnEnemy = false;
         respawnPlayer = false;
+        pause = false;
     }
 
     private void Awake(){
@@ -37,6 +42,9 @@ public class LevelManager : MonoBehaviour
             RespawnPlayer();
         
         MyPoints();
+        MyLife();
+        PauseMenu();
+        
         
     }
 
@@ -77,13 +85,37 @@ public class LevelManager : MonoBehaviour
     void MyPoints(){
         textPontuacao.text = "Pontuação: " + pontuacao.ToString();
     }
+    void MyLife(){
+        textLife.text = "Vida: " + 
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Target>().life;
+    }
+
+    void PauseMenu(){
+        if(Input.GetButtonDown("Cancel")){
+            if(!pause){
+                pause = true;
+                pauseMenu.SetActive(true);
+                Time.timeScale = 0f;
+            }
+            else{
+                pause = false;
+                pauseMenu.SetActive(false);
+                Time.timeScale = 1f;
+            }
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "Player"){
             if(numCaixas == 0 && respawnEnemy){
                 RespawnCaixas();
                 RespawnEnemy();
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Target>().life += 1;
             }
         }    
+    }
+
+    public void GameOver(){
+        SceneManager.LoadScene("GameOver");
     }
 }

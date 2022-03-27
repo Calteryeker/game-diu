@@ -18,8 +18,11 @@ public class Caixa : MonoBehaviour
     }
 
     void OnDestroy() {
-        LevelManager.instance.numCaixas--;
-        LevelManager.instance.pontuacao += 100;
+        if(GetComponent<Target>().life <= 0){
+            LevelManager.instance.numCaixas--;
+            LevelManager.instance.pontuacao += 100;
+        }
+        
     }
 
 }

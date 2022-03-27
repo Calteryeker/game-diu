@@ -25,15 +25,15 @@ public class Target : MonoBehaviour
         }
         else{
             StopHit();
-            if(life == 0){
+            if(life <= 0){
                 Destroy(this.gameObject);
             }
         }
     }
 
-    public void GotHited(){
+    public void GotHited(int damage){
         anim.SetBool("hited", true);
-        life--;
+        life -= damage;
         frameCount = 20;
     }
 
